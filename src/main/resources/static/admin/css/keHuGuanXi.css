@@ -1,0 +1,112 @@
+.right_box {
+	margin-top: 15px;
+	border-top: 1px solid #ddd;
+	padding: 15px 0;
+	font: 12px "microsoft yahei", Arial, Helvetica, sans-serif !important;
+}
+
+.ibox-content {
+	clear: both;
+}
+
+.form-group label {
+	text-align: left !important;
+}
+
+.form-control {
+	margin-left: -50px;
+}
+
+#ifr {
+	position: fixed;
+	right: -780px;
+	top: 0;
+	z-index: 90;
+	box-shadow: 10px, 10px, 5px, #ddd;
+	z-index: 2000;
+}
+
+th.prev {
+	background: url(img/dateleft.png) -3px !important;
+}
+
+th.next {
+	background: url(img/dateright.png) -10px !important;
+}
+
+.tr_active {
+	background: #FEF388 !important;
+}
+
+.left_b_table,
+.right_map_box {
+	width: 49%;
+	float: left;
+}
+
+.right_map_box {
+	float: right;
+}
+
+.tab_list {
+	overflow: hidden;
+	border-bottom: 1px solid #ddd;
+}
+
+.tab_box {
+	overflow: hidden;
+	display: inline-block;
+}
+
+.tab_list .search_inp {
+	display: inline-block;
+	float: right;
+}
+
+.tab_box,
+.tab_box>li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.tab_box>li {
+	padding: 10px 15px;
+	float: left;
+	cursor: pointer;
+}
+
+.tab_box>li.select_tab {
+	border-bottom: 3px solid #F8AC5A;
+}
+
+.table_content>div,
+.right_tab_box>div,
+.top_tab_box>div {
+	display: none;
+}
+
+.table_content>div.active,
+.right_tab_box>div.active,
+.top_tab_box>div.active {
+	display: block;
+}
+
+.form-control {
+	margin-left: -40px;
+}
+
+div.top_tab_box {
+	padding: 10px 0;
+}
+
+#gaoJiSouSuo {
+	display: none;
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0;
+}
+
+.table thead tr th,
+.table tbody tr td {
+	text-align: center;
+}

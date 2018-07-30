@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userDao">
+	<!-- 模糊查询sql块 -->
+	<sql id="sql_where">
+		<where>
+			<if test="userName !=null and userName !='' "> and u.userName=#{userName} </if>
+			<if test="realName !=null and realName !=''">  and u.realName=#{realName}</if>
+			<if test="roleName !=null and roleName !='' "> and r.roleName=#{roleName}</if>
+			<if test="departmentId !=null "> and u.deparentmentId =#{deparentmentId}</if>
+			and u.userType=1
+		</where>
+	</sql>
+	<sql id="sql_where2">
+		<where>
+			<if test="userName !=null and userName !='' "> and u.userName=#{userName} </if>
+			<if test="realName !=null and realName !=''">  and u.realName=#{realName}</if>
+			<if test="roleName !=null and roleName !='' "> and r.roleName=#{roleName}</if>
+			and u.userType=0
+		</where>
+	</sql>
+	<select id="selectUserInfoByPage" parameterType="hashmap"
+		resultType="hashmap">
+		select * from userInfo order By userid limit
+		#{start},#{pageSize}
+	</select>
+	<select id="selectUserInfoByUserType" parameterType="int" resultType="hashmap">
+		select * from userInfo where userType = #{userType} order By userid
+	</select>
+	<select id="selectAllUserInfo"  resultType="hashmap">
+		select * from userInfo order By userid
+	</select>
+	<select id="getProductsCount" resultType="integer">
+		select count(*) from
+		userInfo
+	</select>
+	<select id="checkUserInfo" parameterType="hashmap" resultType="int">
+		select count(*) from userInfo
+		<where>
+			<if test="userName!=null and userName!='' ">
+				userName=#{userName}
+			</if>
+		</where>
+	</select>
+	<select id="selectRealnameByUserId" resultType = "String">
+		select case when (realname is not null and realname!='') then realname else username end from userInfo where userId = #{userId}
+	</select>
+	<select id="selectUserNameByUserId" resultType = "String">
+		select realname from userInfo where userId = #{userId}
+	</select>
+	<select id="findUsers" parameterType="hashmap" resultType="hashmap">
+		select userid as value,username as label from userInfo where userName like "%"#{username}"%" limit 20
+	</select>
+	
+	<!-- 查询所有下级人员 -->
+	<select id="selectAllSubUsers" parameterType="int" resultType="hashmap">
+		select userid,username,realname from userInfo where parentId=#{_parameter}
+	</select>
+	
+	<select id="selectParentId" parameterType="int" resultType="int">
+		select leaderId from userinfo where userid=#{_parameter}
+	</select>
+	<!-- 根据名字查询管理员是否重复 -->
+	<select id="selbyname" parameterType="string" resultType="int">
+		select userid from userinfo where username=#{userName} and userType =#{userType}
+	</select>
+	<!-- 根据部门ID查询 -->
+	<select id="selbydeparentment" parameterType="int" resultType="hashMap">
+		select userid,username,realname from userinfo where departmentId=#{_parameter}
+	</select>
+	<!-- 添加管理员 -->
+	<insert id="addAdminInfo" useGeneratedKeys="true" keyProperty="userId"
+		parameterType="hashmap">
+		insert into userInfo(
+		userName,userPwd,bumen,userType
+		)
+		values(#{userName},#{userPwd},#{bumen},#{userType})
+	</insert>
+	
+	<!--修改管理员 -->
+	<update id="updateAdmin" parameterType="hashmap">
+		UPDATE USERINFO set
+		userPwd=#{userPwd},bumen=#{bumen}
+		WHERE userName=#{userName} and userType = #{userType}
+	</update>
+	<!-- 批量删除会员 -->
+	<delete id="delUser" parameterType="java.util.List">
+		delete from userInfo where userid in
+		<foreach collection="list" index="index" item="userid" open="("
+			separator="," close=")">
+			#{userid}
+		</foreach>
+	</delete>
+	<!-- 查询前台会员信息 -->
+	<select id="selectUser" resultType="hashmap" parameterType="hashmap">
+		select u.*,GROUP_CONCAT(r.roleName) roleName from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId LEFT JOIN role r on r.roleid=ur.roleId
+		<include refid="sql_where" /> GROUP BY u.userId ORDER BY u.registrationDate DESC
+		limit #{start},#{pageSize}
+	</select>
+	<!-- 分页 -->
+	<select id="countUser" resultType="long" parameterType="hashMap">
+		select count(*) from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId LEFT JOIN role r on r.roleid=ur.roleId
+		<include refid="sql_where" />
+	</select>
+
+	<select id="selectAdminUser" resultType="hashmap" parameterType="hashmap">
+		select u.*,GROUP_CONCAT(r.roleName) roleName from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId LEFT JOIN role r on r.roleid=ur.roleId
+		<include refid="sql_where2" /> GROUP BY u.userId ORDER BY u.registrationDate DESC
+		limit #{start},#{length}
+	</select>
+	
+	<select id="countAdminUser" resultType="long" parameterType="hashMap">
+		select count(*) from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId LEFT JOIN role r on r.roleid=ur.roleId
+		<include refid="sql_where2" />
+	</select>
+	<!-- 查询后台角色 -->
+	<select id="selRoleByIdentify2" resultType="hashmap">
+		select * from role where identify=0
+	</select>
+	<!-- 添加用户角色关联表 -->
+	<insert id="addUserRole" parameterType="map">
+		insert into userrole (userId,roleId)  values
+		<foreach collection="roleId" index="index" item="item"
+			separator=",">
+			( #{userId}, #{item} )
+		</foreach>
+	</insert>
+	<!-- 添加管理员 -->
+	<sql id="userInfoColumn">
+		userName,userPwd,telenumber,email,realname,birthDate,address,identitynumber,registrationDate,userType,departmentId,leaderId
+	</sql>
+	<insert id="addAdminUserInfo" useGeneratedKeys="true" keyProperty="userId"
+		parameterType="hashmap">
+		insert into userInfo(
+		<include refid="userInfoColumn"></include>
+		)
+		values(#{userName},#{userPwd},#{telenumber}
+		,#{email},#{realname},#{birthDate},#{address},#{identitynumber},now(),0,#{departmentId},#{leaderId})
+	</insert>
+	<!-- 通过ID查询单个会员 -->
+	<select id="selectUserInfoById" parameterType="int" resultType="hashmap">
+		select u.*,GROUP_CONCAT(r.roleName) roleName,GROUP_CONCAT(CAST(r.roleId AS char)) roleId,d.departmentName from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId LEFT JOIN role r on r.roleid=ur.roleId 	LEFT JOIN department d on d.departmentId = u.departmentId  where u.userId=#{userId}
+	</select>
+	<!-- 修改管理员 -->
+	<update id="updateUser" parameterType="hashmap">
+		UPDATE USERINFO set
+		userName=#{userName}
+		<if test="userPwd !=null and userPwd !='' "> ,userPwd=#{userPwd}</if>
+		,telenumber=#{telenumber},email=#{email},realname=#{realname},birthDate=#{birthDate},address=#{address},identitynumber=#{identitynumber},departmentId=#{departmentId},leaderId=#{leaderId}
+		WHERE userid=#{userId}
+	</update>
+	<delete id="del" parameterType="map">
+		delete from userrole where userId=#{userId}
+	</delete>
+	<select id="select" parameterType="map" resultType="int">
+		select count(*) from userrole where userId=#{userId}
+	</select>
+	<!-- 删除会员 -->
+	<delete id="deleteUser" parameterType="integer">
+		delete userInfo,userrole from userInfo left join userrole on userInfo.userId = userrole.userId where userInfo.userId=#{userId}
+	</delete>
+<!-- 以上是后台管理员相关sql -->	
+	<!-- 修改管理员密码 -->
+	<update id="reAdminPassword" parameterType="hashmap">
+		UPDATE userinfo set
+		userPwd=#{rePwd} WHERE userId=#{userId} and userPwd=#{usrePwd}
+	</update>
+
+
+	<select id="selectUserListCount" parameterType="hashMap" resultType="long">
+		SELECT  count(*) from userinfo u
+		WHERE 1=1
+		<if test="realName!=null and realName != ''">
+			AND u.realName LIKE "%"#{realName}"%"
+		</if>
+	</select>
+	<select id="selectUserList" parameterType="hashMap" resultType="hashMap">
+		SELECT * FROM userinfo u
+		WHERE 1=1
+		<if test="realName!=null and realName != ''">
+			AND u.realName LIKE "%"#{realName}"%"
+		</if>
+		ORDER BY u.registrationDate DESC
+		LIMIT #{start},#{pageSize}
+	</select>
+</mapper>

@@ -1,0 +1,78 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+p,
+blockquote,
+th,
+td {
+	font-family: "Microsoft YaHei", Arial, "微软雅黑";
+	margin: 0;
+	padding: 0;
+}
+
+h3 {
+	font-size: 14px;
+}
+
+#wrapper {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.wrapper-content {
+	padding: 20px 10px 40px;
+}
+
+.wrapper-content>h3 {
+	font-weight: 500;
+	padding-left: 10px;
+	border-left: 2px solid #88B7E0;
+}
+
+.right_box {
+	margin-top: 15px;
+	border-top: 1px dotted #666;
+	padding: 15px 0;
+	font: 12px "microsoft yahei", Arial, Helvetica, sans-serif !important;
+	color: #333;
+	font-weight: 700;
+}
+
+.ibox-content {
+	clear: both;
+}
+
+.form-group label {
+	text-align: left !important;
+}
+
+.form-control {
+	margin-left: -50px;
+}
+
+#ifr {
+	position: fixed;
+	right: -780px;
+	top: 0;
+	z-index: 90;
+	box-shadow: 10px, 10px, 5px, #ddd;
+	z-index: 2000;
+}
+.table_bot{
+	display:none;
+}

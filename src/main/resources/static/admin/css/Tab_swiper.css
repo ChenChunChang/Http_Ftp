@@ -1,0 +1,317 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+p,
+blockquote,
+th,
+td {
+	font-family: "Microsoft YaHei", Arial, "微软雅黑";
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	font-family: "Microsoft YaHei", Arial, "微软雅黑";
+	font-size: 14px;
+	line-height: 30px;
+	width: 100%;
+	height: 100%;
+	color: #34495e;
+	min-width: 1024px;
+}
+
+.detail-inner {
+	width: 780px;
+	background: #fff;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	box-sizing: border-box;
+}
+
+.detail-inner .slid-panel-header {
+	box-sizing: border-box;
+	height: 40px;
+}
+
+.slid-panel-header {
+	height: 30px;
+	background: #e8ebf0;
+	padding: 5px 20px;
+	position: relative;
+}
+
+.detail_left {
+	width: 780px;
+	float: left;
+	box-sizing: border-box;
+}
+
+.detail_left_inner {
+	padding: 20px 20px 0 20px;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.detail_left_head {
+	height: 32px;
+}
+.detail_left_head .header-btn-wrap {
+    display: inline-block;
+    float: right;
+}
+.btn-group-wrapper {
+    max-width: 300px;
+}
+.btn-group-wrapper .btn-group-base.arrow_attention {
+    background-position: -62px 0;
+}
+.btn-group-wrapper .btn-group-base.arrow_addContacter {
+    background-position: -31px 0;
+}
+.btn-group-wrapper .btn-group-base.arrow_createTask {
+    background-position: -93px 0;
+}
+.btn-group-wrapper .btn-group-base.more {
+    background-position: -186px 0;
+}
+.btn-group-wrapper .btn-group-base {
+    width: 28px;
+    height: 27px;
+    margin-left: 6px;
+    margin-right: 0;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-style: normal;
+    position: relative;
+    background-image: url(../img/buttonIcons.png);
+}
+.btn-group-wrapper .btn-group-base.arrow_attention:hover, .btn-group-wrapper .btn-group-base.arrow_attention.active {
+    background-position: -62px -31px;
+}
+.btn-group-wrapper .btn-group-base.arrow_addContacter:hover {
+    background-position: -31px -31px;
+}
+.btn-group-wrapper .btn-group-base.arrow_createTask:hover {
+    background-position: -93px -31px;
+}
+.btn-group-wrapper .btn-group-base.more:hover {
+    background-position: -186px -31px;
+}
+
+.cus_simple_info {
+	min-height: 35px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.fn-clear {
+	clear: both;
+}
+
+.detail_main_nav {
+	height: 31px;
+	border-bottom: 1px solid #ccc;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+.detail_main_nav li {
+	float: left;
+	margin-right: 4px;
+	text-align: center;
+	padding: 0;
+	border-width: 1px 1px 0 1px;
+	border-style: solid;
+	border-color: #bac8d5;
+	position: relative;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.detail_main_nav a {
+	font-size: 14px;
+	color: #434343;
+	padding-left: 12px;
+	display: inline-block;
+	padding-right: 12px;
+}
+
+.slide_nav_hover {
+	background-color: #eaedf2 !important;
+}
+
+a {
+	text-decoration: none;
+}
+
+a {
+	text-decoration: none;
+	outline: 0;
+}
+
+.detail_panels_main_body {
+	/*background: #eaedf2;*/
+	background: #fff;
+	min-height: 400px;
+	padding: 10px 10px 20px 10px;
+	border:1px solid #ddd;
+	border-top:none;
+	/*overflow-y: auto;*/
+}
+
+.slid-panel-header {
+	height: 30px;
+	background: #e8ebf0;
+	padding: 5px 20px;
+	position: relative;
+}
+
+.slid-panel-header .panel-title {
+	font-size: 18px;
+	color: #34495e;
+}
+
+.slid-panel-header .form-close-icon {
+	right: 20px;
+	top: 5px;
+	position: absolute;
+	color: #34495e;
+	display: inline-block;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.detail_left_title {
+	float: left;
+	line-height: 25px;
+	font-size: 18px;
+	height: 32px;
+	line-height: 32px;
+	max-width: 380px;
+	-ms-word-break: break-all;
+	word-break: break-all;
+	overflow: hidden;
+	word-wrap: break-word;
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	font-size: 18px;
+}
+
+.tagSelector-warp .span-tag {
+	width: 76px;
+	height: 23px;
+	line-height: 24px;
+}
+
+.tagSelector-warp .span-tag:hover {
+	border-color: #3FADE3;
+	color: #3FADE3;
+}
+
+.span-tag {
+	border: 1px dotted #999;
+	border-radius: 2px;
+	color: #999;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	width: 20px;
+}
+
+.tagSelector-warp {
+	width: 100%;
+	padding: 10px 0;
+}
+
+.detail_panels_main_body>div {
+	display: none;
+}
+
+.detail_panels_main_body>div.active {
+	display: block;
+}
+
+/*********轮播**********/
+/*清浮动*/
+
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+/* banner */
+.banner{ width: 520px; height: 280px; position: relative; overflow: hidden; margin-bottom: 0; margin-left: auto; margin-right: auto; margin-top: 10%; }
+.banner-btn{display:none;}
+.banner-btn a{display:block;line-height:40px;position:absolute;top:120px;width:40px;height:40px;background-color:#000;opacity:0.3;filter:alpha(opacity=30) color:rgb(255, 255, 255);overflow:hidden;z-index:4;}
+.prevBtn{left:5px;}
+.nextBtn{right:5px;}
+.banner-img{font-size:0;*word-spacing:-1px;/* IE6、7 */ letter-spacing:-3px;position:relative;}
+.banner-img li{display:inline-block;*display:inline;*zoom:1;/* IE6、7 */ vertical-align:top;letter-spacing:normal;word-spacing:normal;font-size:12px;position:relative;}
+.banner i{background:url(../img/T1szNBFzlmXXX8QSDI-400-340.png)  no-repeat;width:15px;height:23px;cursor:pointer;margin:8px 0 0 12px;display:block;}
+.banner .nextBtn i{background-position:-200px -24px;}
+.banner .prevBtn i{background-position:-200px 0px;}
+.banner-circle{position:absolute;left:50%;bottom:15px;height:13px;text-align:center;font-size:0;border-radius:10px;background:rgba(255,255,255,0.3);filter:alpha(opacity:30);}
+.banner-circle li{border-radius:10px;margin:2px;display:inline-block;display:-moz-inline-stack;vertical-align:middle;zoom:1;position:relative;top:-9px;}
+.banner-circle li a{display:block;padding-top:9px;width:9px;height:0;border-radius:50%;background:#B7B7B7;overflow:hidden;}
+.banner-circle .selected a{background:#F40;}
+.banner-img h3{
+	position:absolute;
+	top:0;
+	left: 0;
+	width:100%;
+	color:#fff;
+	line-height: 50px;
+	background:#333;
+	opacity:0.5;
+	text-align: center;
+}

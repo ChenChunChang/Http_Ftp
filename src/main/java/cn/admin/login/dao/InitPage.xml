@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="initPageDao" >
+		<select id="selectAllMenu" resultType="hashmap">
+			select * from authority order by indexNo asc
+		</select>
+		
+		<select id="selectModule" parameterType="String" resultType="hashMap" >
+			select * from authority where isLeafModule=1 and 
+			parentModuleID in (select parentModuleID from authority where AuthorityID in 
+			<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+               #{item}
+          </foreach>
+			) order by indexNo 
+		</select>
+		<!--点击顶部导航 -->
+		<select id="selectDaoHang" resultType="hashMap" parameterType="String">
+				select * from authority where isLeafModule=1 and 
+				AuthorityID in
+				<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+               		#{item}
+          		</foreach> 
+				 order by indexNo 
+		</select>
+		<!--根据点击的类型查询孙子类 -->
+		<select id="selectSZ" resultType="hashMap" parameterType="String">
+				select DISTINCT a.parentModuleID from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId 
+				LEFT JOIN role r on r.roleid=ur.roleId LEFT JOIN roleauthority ra ON r.roleid=ra.RoleID
+				LEFT JOIN authority a on a.AuthorityDescription=ra.AuthorityID 
+				where a.parentModuleID in ( select AuthorityID from authority where parentModuleID in (select AuthorityID from authority where AuthorityType=#{AuthorityType}))
+		</select>
+		
+		<!-- 查询子节点 -->
+		<select id="selectChild" resultType="hashMap" parameterType="String">
+				select DISTINCT a.* from userinfo u LEFT JOIN userrole ur on u.userId=ur.userId 
+				LEFT JOIN role r on r.roleid=ur.roleId LEFT JOIN roleauthority ra ON r.roleid=ra.RoleID
+				LEFT JOIN authority a on a.AuthorityDescription=ra.AuthorityID where u.userId=#{userId} and a.isLeafModule=1 and a.isInTree=1 order by a.parentModuleID,a.indexNo
+		</select>
+		<!-- 查询默认页  一级列表 -->
+		<select id="selone" parameterType="map" resultType="hashMap">
+				SELECT a.AuthorityID,a.indexNo FROM authority a 
+				LEFT JOIN roleauthority ra  ON ra.AuthorityID=a.AuthorityDescription
+				LEFT JOIN role r on r.roleid=ra.RoleID
+				LEFT JOIN userrole u1 on u1.roleId=r.roleid 
+				LEFT JOIN userinfo u on u.userId=u1.userId  
+				WHERE parentModuleID=#{parentModuleID} AND u.userId=#{userId}
+				ORDER BY a.indexNo asc	
+		</select>
+		<!-- 查询默认页 根据 一级列表查询二级列表 -->
+		<select id="seltwo" parameterType="map" resultType="hashMap">
+				SELECT a.AuthorityID,a.indexNo FROM authority a 
+				LEFT JOIN roleauthority ra  ON ra.AuthorityID=a.AuthorityDescription
+				LEFT JOIN role r on r.roleid=ra.RoleID
+				LEFT JOIN userrole u1 on u1.roleId=r.roleid 
+				LEFT JOIN userinfo u on u.userId=u1.userId  
+				WHERE parentModuleID=#{parentModuleID} AND u.userId=#{userId}		
+				ORDER BY a.indexNo asc		
+		</select>
+		
+		<!-- 查询默认页url -->
+		<select id="selUrl" parameterType="map" resultType="hashMap">
+			SELECT a.moduleUrl from authority a LEFT JOIN authority a1 on a.AuthorityID=a1.parentModuleID where a.parentModuleID=#{parentModuleID}
+			  <if test="indexNo!=null and indexNo!=''">and a1.indexNo=#{indexNob}</if> and a.indexNo=#{indexNoa}
+		</select>
+		<!-- login -->
+	<select id="login" parameterType="hashmap" resultType="map">
+		select userId,userType,userName,telenumber,realname from userInfo
+		<where>
+			<if test="userName!=null and userName!='' and userPwd!=null and userPwd!='' ">
+				(userName=#{userName} or telenumber=#{userName} ) AND userPwd=#{userPwd}
+			</if>
+		</where>
+	</select>
+</mapper>

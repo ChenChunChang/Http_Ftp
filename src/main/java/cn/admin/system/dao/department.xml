@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deptDao">
+	<!-- 查询所有组别 -->
+	<select id="selectDeptNameById" parameterType="int"  resultType="string">
+		select departmentName from department where departmentId=#{_parameter} and dstatus=1
+	</select>
+	<!-- 查询所有组别 -->
+	<select id="selectdept"  resultType="map">
+		select * from department where dstatus=1
+	</select>
+	<!-- 查询所有组别，包含用户数量 -->
+	<select id="selectdeptwithusercount"  resultType="map">
+		select d.*,(select count(*) from userInfo u where u.departmentId=d.departmentId) as userCount from department d where dstatus=1
+	</select>
+	<!-- 增加部门 -->
+	<insert id="addDept" parameterType="map" >
+		INSERT INTO department (departmentName,parentId,dremark,dstatus) VALUES (#{departmentName},#{parentId},#{dremark},#{dstatus})
+	</insert>
+	<!-- 根据部门Id查询部门信息 -->
+	<select id="selDepartmentById" parameterType="String" resultType="hashMap">
+		SELECT d.*,de.departmentName pdepartmentName FROM `department` d   LEFT JOIN department de on de.departmentId=d.parentId where d.departmentId=#{departmentId}
+	</select>
+	<!-- 修改部门 -->
+	<update id="updateDept" parameterType="map">
+		update  department set departmentName=#{departmentName}, parentId=#{parentId} ,dremark=#{dremark},dstatus=#{dstatus} where departmentId=#{departmentId}
+	</update>
+	<!-- 根据部门ID查询组 -->
+	<select id="findzb"  resultType="map" parameterType="string">
+		SELECT * from department WHERE parentId=#{departmentId}
+	</select>
+	<!-- 通过部门Id 查询当前部门下的所有人 -->
+	<select id="selUserByDeId" resultType="hashMap" parameterType="string">
+		select userId,userName,departmentId from userInfo where 1=1
+		<if test="_parameter != '' and _parameter != null "> and departmentId = #{_parameter}</if>
+	</select>
+	<!-- 删除部门 -->
+	<delete id="delDept" parameterType="map">
+		delete from department where departmentId=#{departmentId}
+	</delete>
+	<select id="selFU" resultType="hashmap">
+		select * from department where parentId=0
+	</select>
+	<select id="selZI" resultType="hashmap">
+		select * from department where parentId!=0
+	</select>
+	
+</mapper>

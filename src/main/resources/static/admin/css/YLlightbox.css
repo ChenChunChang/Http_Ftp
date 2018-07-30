@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#YLimgwrap{ position:fixed; left:0; top:0; right:0; bottom:0; background:rgba(0,0,0,.6); z-index:3000; display:none; }
+#YLimgcon{ display:inline-block; padding:10px; position:absolute; background:#fff; }
+#YLimgcon:hover{ cursor:move; }
+#YLimgcon h4{ box-sizing:border-box; height:25px; line-height:20px; padding:0 0 5px; font-size:16px; font-weight:normal; /*background:#6CF*/}
+#YLimgcon h4 a{ float:right; display:inline-block; width:20px; height:20px; text-align:center; margin-left:6px; overflow:hidden; cursor:pointer; background-image:url(/admin/img/imgzoom_tb.gif); background-repeat:no-repeat; border-radius:3px; }
+#YLimgcon h4 .YLt_close{ background-position:right top; }
+#YLimgcon h4 .YLt_close:hover{ background-position:right bottom; }
+#YLimgcon h4 .YLt_size{ background-position:-38px top;}
+#YLimgcon h4 .YLt_size:hover{ background-position:-38px bottom; }
+#YLimgcon .prev,#YLimgcon .next{ display:inline-block; width:40px; height:40px; position:absolute; top:50%; overflow:hidden; margin-top:-20px; display:none; }
+
+
+
+
+
+
+
+
