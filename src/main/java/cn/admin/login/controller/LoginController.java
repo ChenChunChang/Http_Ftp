@@ -45,8 +45,7 @@ public class LoginController {
 	/**
 	 * @Description: 登陆
 	 */
-	@RequestMapping(value = "/login/userLogin", method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = "/login/userLogin", method = { RequestMethod.GET,RequestMethod.POST })
 	@ResponseBody
 	Map<String, Object> getUserInfo(@RequestParam Map<String, Object> login) {
 		Map<String, Object> map = new HashMap<String, Object>();
