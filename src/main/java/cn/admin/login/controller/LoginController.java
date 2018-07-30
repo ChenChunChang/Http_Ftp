@@ -32,7 +32,6 @@ public class LoginController {
 	@Autowired
 	RoleService roleService;
 	@Autowired
-	//HttpCookie cookie;
 	HttpSession session;
 	
 	@RequestMapping(value={"","/login"})
